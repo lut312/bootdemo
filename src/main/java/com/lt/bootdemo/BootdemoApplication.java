@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @SpringBootApplication
+@EnableConfigurationProperties({ConfigBean.class})
 public class BootdemoApplication {
 
     @Value("${name}")
