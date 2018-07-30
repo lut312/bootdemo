@@ -11,7 +11,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    @RequestMapping("/")
+    @RequestMapping("")
     public ModelAndView index(){
         List<LearnResouce> learnList =new ArrayList<LearnResouce>();
         LearnResouce bean =new LearnResouce("官方参考文档","Spring Boot Reference Guide","http://docs.spring.io/spring-boot/docs/1.5.1.RELEASE/reference/htmlsingle/#getting-started-first-application");
@@ -36,6 +36,7 @@ public class UserController {
         learnList.add(bean);
         ModelAndView modelAndView = new ModelAndView("/index");
         modelAndView.addObject("learnList", learnList);
+        System.out.print(learnList);
         return modelAndView;
     }
 }

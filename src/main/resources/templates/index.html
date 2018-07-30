@@ -16,9 +16,9 @@
         </tr>
         <!--/*@thymesVar id="learnList" type=""*/-->
         <tr th:each="learn : ${learnList}">
-            <!--<td th:text="${learn.name}">嘟嘟MD</td>-->
-            <!--<td th:text="${learn.des}">SPringBoot干货系列</td>-->
-            <!--<td><a th:href="${learn.url}" target="_blank">点我</a></td>-->
+            <td th:text="${learn.name}">嘟嘟MD</td>
+            <td th:text="${learn.des}">SPringBoot干货系列</td>
+            <td><a th:href="${learn.url}" target="_blank">点我</a></td>
         </tr>
     </table>
 </div>
