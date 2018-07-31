@@ -1,3 +1,4 @@
+/*
 package com.lt.bootdemo.controller;
 
 import com.lt.bootdemo.domain.LearnResouce;
@@ -40,3 +41,4 @@ public class UserController {
         return modelAndView;
     }
 }
+*/

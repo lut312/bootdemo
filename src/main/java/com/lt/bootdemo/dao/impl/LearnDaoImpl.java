@@ -19,12 +19,12 @@ public class LearnDaoImpl implements LearnDao {
 
     @Override
     public int add(LearnResouce learnResouce) {
-        return jdbcTemplate.update("insert into learn_resource(author, title,url) values(?, ?, ?)",learnResouce.getName(),learnResouce.getDes(),learnResouce.getUrl());
+        return jdbcTemplate.update("insert into learn_resource(author, title,url) values(?, ?, ?)",learnResouce.getAuthor(),learnResouce.getTitle(),learnResouce.getUrl());
     }
 
     @Override
     public int update(LearnResouce learnResouce) {
-        return jdbcTemplate.update("update learn_resource set author=?,title=?,url=? where id = ?",new Object[]{learnResouce.getName(),learnResouce.getDes(),learnResouce.getUrl(),learnResouce.getId()});
+        return jdbcTemplate.update("update learn_resource set author=?,title=?,url=? where id = ?",new Object[]{learnResouce.getAuthor(),learnResouce.getTitle(),learnResouce.getUrl(),learnResouce.getId()});
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.lt.bootdemo.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 import com.lt.bootdemo.domain.LearnResouce;
 import com.lt.bootdemo.service.LearnService;
 import com.lt.bootdemo.tools.Page;
@@ -41,12 +42,12 @@ public class LearnController {
         params.put("rows", rows);
         params.put("author", author);
         params.put("title", title);
-        Page pageObj =learnService.queryLearnResouceList(params);
-        List<Map<String, Object>> learnList=pageObj.getResultList();
+        List<LearnResouce> learnList=learnService.queryLearnResouceList(params);
+        PageInfo<LearnResouce> pageInfo =new PageInfo<LearnResouce>(learnList);
         JSONObject jo=new JSONObject();
         jo.put("rows", learnList);
-        jo.put("total", pageObj.getTotalPages());
-        jo.put("records", pageObj.getTotalRows());
+        jo.put("total", pageInfo.getPages());//总页数
+        jo.put("records",pageInfo.getTotal());//查询出的总记录数
         ServletUtil.createSuccessResponse(200, jo, response);
     }
 /**
@@ -79,8 +80,8 @@ public class LearnController {
             return;
         }
         LearnResouce learnResouce = new LearnResouce();
-        learnResouce.setName(author);
-        learnResouce.setDes(title);
+        learnResouce.setAuthor(author);
+        learnResouce.setTitle(title);
         learnResouce.setUrl(url);
         int index = learnService.add(learnResouce);
         System.out.println("结果="+index);
@@ -125,8 +126,8 @@ public class LearnController {
             ServletUtil.createSuccessResponse(200, result, response);
             return;
         }
-        learnResouce.setName(author);
-        learnResouce.setDes(title);
+        learnResouce.setAuthor(author);
+        learnResouce.setTitle(title);
         learnResouce.setUrl(url);
         int index=learnService.update(learnResouce);
         System.out.println("修改结果="+index);
@@ -154,7 +155,7 @@ public class LearnController {
         System.out.println("ids==="+ids);
         JSONObject result = new JSONObject();
         //删除操作
-        int index = learnService.deleteByIds(ids);
+        int index = learnService.deleteByIds(ids.split(","));
         if(index>0){
             result.put("message","教程信息删除成功!");
             result.put("flag",true);

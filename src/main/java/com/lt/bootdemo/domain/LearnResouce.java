@@ -2,8 +2,8 @@ package com.lt.bootdemo.domain;
 
 public class LearnResouce {
     private Long id;
-    private String name;
-    private String des;
+    private String author;
+    private String title;
     private String url;
 
     public LearnResouce() {
@@ -17,20 +17,20 @@ public class LearnResouce {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public String getDes() {
-        return des;
+    public String getTitle() {
+        return title;
     }
 
-    public void setDes(String des) {
-        this.des = des;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getUrl() {
@@ -38,12 +38,6 @@ public class LearnResouce {
     }
 
     public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public LearnResouce(String name, String des, String url) {
-        this.name = name;
-        this.des = des;
         this.url = url;
     }
 }

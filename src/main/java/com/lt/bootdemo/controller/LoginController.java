@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -41,9 +42,10 @@ public class LoginController {
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
         if(!userName.equals("") && password != ""){
-            User user = userService.findByNameAndPassword(userName, password);
+            List<User> userList = userService.findByNameAndPassword(userName, password);
 //            User user =new User(userName,password);
-            if (user != null) {
+            if (userList != null && userList.size()>0) {
+                User user = userList.get(0);
                 request.getSession().setAttribute("user",user);
                 map.put("result","1");
             } else {
