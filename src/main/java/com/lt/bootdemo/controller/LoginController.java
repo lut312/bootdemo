@@ -37,14 +37,19 @@ public class LoginController {
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> login(HttpServletRequest request, HttpServletResponse response){
-        Map<String,Object> map =new HashMap<String,Object>();
-        String userName=request.getParameter("userName");
-        String password=request.getParameter("password");
-        if(!userName.equals("") && password!=""){
-//            User user = userService.findByName(userName);
-            User user =new User(userName,password);
-            request.getSession().setAttribute("user",user);
-            map.put("result","1");
+        Map<String,Object> map = new HashMap<String,Object>();
+        String userName = request.getParameter("userName");
+        String password = request.getParameter("password");
+        if(!userName.equals("") && password != ""){
+            User user = userService.findByNameAndPassword(userName, password);
+//            User user =new User(userName,password);
+            if (user != null) {
+                request.getSession().setAttribute("user",user);
+                map.put("result","1");
+            } else {
+                map.put("result","0");
+            }
+
         }else{
             map.put("result","0");
         }

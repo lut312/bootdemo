@@ -8,4 +8,5 @@ import org.springframework.stereotype.Component;
 @Mapper
 public interface UserDao {
    User findByName(String name);
+   User findByNameAndPassword(String name, String password);
 }

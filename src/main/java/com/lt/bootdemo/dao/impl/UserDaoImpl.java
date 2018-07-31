@@ -26,4 +26,18 @@ public class UserDaoImpl implements UserDao {
         }
 
     }
+
+    @Override
+    public User findByNameAndPassword(String name, String password) {
+        StringBuffer sql =new StringBuffer();
+        sql.append("select * from user where 1=1");
+        sql.append(" and username = '" + name + "' and password = '" + password + "'");
+        List<User> list = jdbcTemplate.query(sql.toString(),  new BeanPropertyRowMapper(User.class));
+        if(null != list && list.size()>0){
+            User user = list.get(0);
+            return user;
+        }else{
+            return null;
+        }
+    }
 }
