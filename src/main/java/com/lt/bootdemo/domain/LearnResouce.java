@@ -6,6 +6,9 @@ public class LearnResouce {
     private String des;
     private String url;
 
+    public LearnResouce() {
+    }
+
     public Long getId() {
         return id;
     }

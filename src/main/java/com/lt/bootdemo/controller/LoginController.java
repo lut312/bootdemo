@@ -1,25 +1,25 @@
 package com.lt.bootdemo.controller;
 
-import com.lt.bootdemo.domain.LearnResouce;
 import com.lt.bootdemo.domain.User;
 
+import com.lt.bootdemo.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
 public class LoginController {
+    @Autowired
+    private UserService userService;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 /**
      *登录操作
@@ -41,6 +41,7 @@ public class LoginController {
         String userName=request.getParameter("userName");
         String password=request.getParameter("password");
         if(!userName.equals("") && password!=""){
+//            User user = userService.findByName(userName);
             User user =new User(userName,password);
             request.getSession().setAttribute("user",user);
             map.put("result","1");
@@ -49,7 +50,7 @@ public class LoginController {
         }
         return map;
     }
-
+/*
     @RequestMapping("/learn")
     public ModelAndView index(){
         List<LearnResouce> learnList =new ArrayList<LearnResouce>();
@@ -76,5 +77,5 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView("/template");
         modelAndView.addObject("learnList", learnList);
         return modelAndView;
-    }
+    }*/
 }

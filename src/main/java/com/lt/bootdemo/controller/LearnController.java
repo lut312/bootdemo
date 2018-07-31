@@ -1,9 +1,11 @@
-/*
 package com.lt.bootdemo.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.lt.bootdemo.domain.LearnResouce;
 import com.lt.bootdemo.service.LearnService;
 import com.lt.bootdemo.tools.Page;
+import com.lt.bootdemo.tools.ServletUtil;
+import com.lt.bootdemo.tools.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,12 +49,10 @@ public class LearnController {
         jo.put("records", pageObj.getTotalRows());
         ServletUtil.createSuccessResponse(200, jo, response);
     }
-    */
 /**
      * 新添教程
      * @param request
-     * @param response
-     *//*
+     * @param response*/
 
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public void addLearn(HttpServletRequest request , HttpServletResponse response){
@@ -79,10 +79,10 @@ public class LearnController {
             return;
         }
         LearnResouce learnResouce = new LearnResouce();
-        learnResouce.setAuthor(author);
-        learnResouce.setTitle(title);
+        learnResouce.setName(author);
+        learnResouce.setDes(title);
         learnResouce.setUrl(url);
-        int index=learnService.add(learnResouce);
+        int index = learnService.add(learnResouce);
         System.out.println("结果="+index);
         if(index>0){
             result.put("message","教程信息添加成功!");
@@ -93,12 +93,11 @@ public class LearnController {
         }
         ServletUtil.createSuccessResponse(200, result, response);
     }
-    */
 /**
      * 修改教程
      * @param request
-     * @param response
-     *//*
+     * @param response*/
+
 
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public void updateLearn(HttpServletRequest request , HttpServletResponse response){
@@ -126,8 +125,8 @@ public class LearnController {
             ServletUtil.createSuccessResponse(200, result, response);
             return;
         }
-        learnResouce.setAuthor(author);
-        learnResouce.setTitle(title);
+        learnResouce.setName(author);
+        learnResouce.setDes(title);
         learnResouce.setUrl(url);
         int index=learnService.update(learnResouce);
         System.out.println("修改结果="+index);
@@ -140,12 +139,13 @@ public class LearnController {
         }
         ServletUtil.createSuccessResponse(200, result, response);
     }
-    */
-/**
+/*
+*
      * 删除教程
      * @param request
      * @param response
-     *//*
+
+*/
 
     @RequestMapping(value="/delete",method = RequestMethod.POST)
     @ResponseBody
@@ -165,4 +165,3 @@ public class LearnController {
         ServletUtil.createSuccessResponse(200, result, response);
     }
 }
-*/
