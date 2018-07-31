@@ -2,6 +2,9 @@ package com.lt.bootdemo.controller;
 
 import com.lt.bootdemo.domain.LearnResouce;
 import com.lt.bootdemo.domain.User;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,11 +20,17 @@ import java.util.Map;
 
 @Controller
 public class LoginController {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 /**
      *登录操作
      **/
     @RequestMapping("")
     public String login(){
+        return "login";
+    }
+
+    @RequestMapping("/toLogin")
+    public String toLogin(){
         return "login";
     }
 

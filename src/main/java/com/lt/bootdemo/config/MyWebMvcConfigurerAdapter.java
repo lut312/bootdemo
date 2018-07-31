@@ -35,9 +35,9 @@ public class MyWebMvcConfigurerAdapter implements WebMvcConfigurer {
      * 拦截器
      * @param registry
      */
-    /*@Override
+    @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new MyInterceptor()).addPathPatterns("/**")
-                .excludePathPatterns("/toLogin","/login","/assets/**");
-    }*/
+                .excludePathPatterns("/","/login","/toLogin","/assets/**");
+    }
 }
