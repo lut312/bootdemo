@@ -1,22 +1,27 @@
 package com.lt.bootdemo;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.lt.bootdemo.util.MyMapper;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
-
 @SpringBootApplication
+//启注解事务管理
+@EnableTransactionManagement  // 启注解事务管理，等同于xml配置方式的 <tx:annotation-driven />
+@MapperScan(basePackages = "com.lt.bootdemo.dao", markerInterface = MyMapper.class)
 public class BootdemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(BootdemoApplication.class, args);
     }
 
-    @Autowired
+    /*@Autowired
     private Environment env;
 
     //destroy-method="close"的作用是当数据库连接不使用的时候,就把该连接重新放到数据池中,方便下次使用调用.
@@ -36,7 +41,7 @@ public class BootdemoApplication {
         dataSource.setTestWhileIdle(true);//建议配置为true，不影响性能，并且保证安全性。
         dataSource.setPoolPreparedStatements(false);//是否缓存preparedStatement，也就是PSCache
         return dataSource;
-    }
+    }*/
 
 
 }

@@ -4,7 +4,7 @@ import com.lt.bootdemo.domain.User;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends IService<User>{
 //    User findByName(String name);
-List<User> findByNameAndPassword(String name, String password);
+    List<User> findByNameAndPassword(String name, String password);
 }

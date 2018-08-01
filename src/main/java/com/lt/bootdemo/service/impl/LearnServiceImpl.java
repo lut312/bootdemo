@@ -1,41 +1,31 @@
 package com.lt.bootdemo.service.impl;
 
-import com.lt.bootdemo.dao.LearnMapper;
-import com.lt.bootdemo.domain.LearnResouce;
+import com.github.pagehelper.PageHelper;
+import com.lt.bootdemo.dao.LearnResourceMapper;
+import com.lt.bootdemo.domain.LeanQueryLeanListReq;
+import com.lt.bootdemo.domain.LearnResource;
+import com.lt.bootdemo.service.BaseService;
 import com.lt.bootdemo.service.LearnService;
-import com.lt.bootdemo.tools.Page;
+import com.lt.bootdemo.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 @Service
-public class LearnServiceImpl implements LearnService {
+public class LearnServiceImpl extends BaseService<LearnResource> implements LearnService {
     @Autowired
-    LearnMapper learnMapper;
+    private LearnResourceMapper learnResourceMapper;
+
     @Override
-    public int add(LearnResouce learnResouce) {
-        return this.learnMapper.add(learnResouce);
+    public void deleteBatch(Long[] ids) {
+        Arrays.stream(ids).forEach(id->learnResourceMapper.deleteByPrimaryKey(id));
     }
 
     @Override
-    public int update(LearnResouce learnResouce) {
-        return this.learnMapper.update(learnResouce);
-    }
-
-    @Override
-    public int deleteByIds(String[] ids) {
-        return this.learnMapper.deleteByIds(ids);
-    }
-
-    @Override
-    public LearnResouce queryLearnResouceById(Long id) {
-        return this.learnMapper.queryLearnResouceById(id);
-    }
-
-    @Override
-    public List<LearnResouce> queryLearnResouceList(Map<String,Object> params) {
-        return this.learnMapper.queryLearnResouceList(params);
+    public List<LearnResource> queryLearnResouceList(Page<LeanQueryLeanListReq> page) {
+        PageHelper.startPage(page.getPage(), page.getRows());
+        return learnResourceMapper.queryLearnResouceList(page.getCondition());
     }
 }
