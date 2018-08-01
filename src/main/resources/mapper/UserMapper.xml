@@ -9,4 +9,7 @@
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
   </resultMap>
+  <select id="login" resultType="com.lt.bootdemo.domain.User">
+    SELECT * from user where 1=1 and username = #{username} and password = #{password}
+  </select>
 </mapper>

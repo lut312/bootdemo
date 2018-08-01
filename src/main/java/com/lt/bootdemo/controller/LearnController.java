@@ -26,7 +26,7 @@ public class LearnController {
 
     @RequestMapping("")
     public String learn(){
-        return "learn";
+        return "learn-resource";
     }
 
     /**

@@ -39,10 +39,18 @@ public class LoginController {
     @ResponseBody
     public Map<String,Object> login(HttpServletRequest request, HttpServletResponse response){
         Map<String,Object> map = new HashMap<String,Object>();
+        Map<String,Object> userMap = new HashMap<String,Object>();
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
+        userMap.put("username", userName);
+        userMap.put("password", password);
         if(!userName.equals("") && password != ""){
-            List<User> userList = userService.findByNameAndPassword(userName, password);
+            User user = userService.login(userMap);
+            if (user != null) {
+                request.getSession().setAttribute("user",user);
+                map.put("result","1");
+            }
+            /*List<User> userList = userService.findByNameAndPassword(userName, password);
 //            User user =new User(userName,password);
             if (userList != null && userList.size()>0) {
                 User user = userList.get(0);
@@ -50,7 +58,7 @@ public class LoginController {
                 map.put("result","1");
             } else {
                 map.put("result","0");
-            }
+            }*/
 
         }else{
             map.put("result","0");
